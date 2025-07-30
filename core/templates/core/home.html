@@ -1,0 +1,21 @@
+<!-- core/templates/core/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uploaded Documents</title>
+</head>
+<body>
+    <h1>Uploaded Documents</h1>
+    <a href="{% url 'upload_document' %}">Upload New Document</a>
+    <ul>
+        {% for doc in documents %}
+            <li>
+                <strong>{{ doc.title }}</strong><br>
+                <a href="{{ doc.file.url }}">{{ doc.file.name }}</a> (Uploaded at {{ doc.uploaded_at }})
+            </li>
+        {% empty %}
+            <li>No documents uploaded yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
