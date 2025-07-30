@@ -8,14 +8,18 @@
     <h1>Uploaded Documents</h1>
     <a href="{% url 'upload_document' %}">Upload New Document</a>
     <ul>
-        {% for doc in documents %}
-            <li>
-                <strong>{{ doc.title }}</strong><br>
-                <a href="{{ doc.file.url }}">{{ doc.file.name }}</a> (Uploaded at {{ doc.uploaded_at }})
-            </li>
-        {% empty %}
-            <li>No documents uploaded yet.</li>
-        {% endfor %}
+    {% for doc in documents %}
+        <li>
+            <strong>{{ doc.title }}</strong><br>
+            <a href="{{ doc.file.url }}">{{ doc.file.name }}</a> (Uploaded at {{ doc.uploaded_at }})
+            <p><strong>Extracted Text:</strong></p>
+            <div style="white-space: pre-wrap; border: 1px solid #ddd; padding: 10px;">
+                {{ doc.extracted_text|truncatewords:100 }}
+            </div>
+        </li>
+    {% empty %}
+        <li>No documents uploaded yet.</li>
+    {% endfor %}
     </ul>
 </body>
 </html>
