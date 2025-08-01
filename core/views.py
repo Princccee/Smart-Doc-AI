@@ -4,6 +4,7 @@ from .forms import DocumentForm
 from .models import Document
 from .utils.extract_text import extract_text_from_file
 from .utils.ai_classifier import classify_with_gemini
+from .utils.metadata_tagger import extract_entities
 import shutil
 import os
 from django.conf import settings
@@ -19,12 +20,18 @@ def upload_document(request):
             doc = form.save(commit=False)
             doc.save()
             file_path = doc.file.path
+
+            # Extract text from the uploaded file
             extracted = extract_text_from_file(file_path)
             doc.extracted_text = extracted
 
             # Classify using Gemini
             predicted = classify_with_gemini(extracted)
             doc.predicted_label = predicted
+
+            # Extract metadata entities
+            entities = extract_entities(extracted)
+            doc.metadata = entities
 
             # Move file to category folder
             if predicted and predicted != "Unknown":

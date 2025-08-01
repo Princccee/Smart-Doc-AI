@@ -1,6 +1,6 @@
-# 📄 Smart Document Tagger & Classifier (Django + Gemini AI)
+# 📄 Smart Document Tagger & Classifier 
 
-A full-stack intelligent document management system that uses **Google Gemini AI** to automatically:
+A full-stack intelligent document management system that automatically:
 - Extract text from uploaded documents (`.pdf` / `.txt`)
 - Classify documents into predefined enterprise categories
 - Move files to category-specific folders
