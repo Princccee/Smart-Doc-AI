@@ -4,7 +4,7 @@ from .forms import DocumentForm
 from .models import Document
 from .utils.extract_text import extract_text_from_file
 from .utils.ai_classifier import classify_with_gemini
-from .utils.metadata_tagger import extract_entities
+from .utils.ai_metadata_extractor import extract_metadata_with_gemini
 import shutil
 import os
 from django.conf import settings
@@ -30,8 +30,10 @@ def upload_document(request):
             doc.predicted_label = predicted
 
             # Extract metadata entities
-            entities = extract_entities(extracted)
-            doc.metadata = entities
+            metadata = extract_metadata_with_gemini(extracted)
+            doc.metadata = metadata
+
+            print(f"[Document Processed] {doc.file.name} - Predicted: {predicted}, Metadata: {metadata}")
 
             # Move file to category folder
             if predicted and predicted != "Unknown":
