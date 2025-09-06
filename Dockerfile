@@ -2,9 +2,6 @@
 # Step 1: Use official Python image
 FROM python:3.11-slim
 
-# Step 2: Set environment variables
-ENV GEMINI_API_KEY=AIzaSyB9v2CdzM_96oRIvekI3-nMSa17BKMUhs4
-
 # Step 3: Set work directory
 WORKDIR /app
 
