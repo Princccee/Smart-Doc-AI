@@ -67,12 +67,23 @@
                     </div>
                 {% endif %}
 
-                <div class="extracted">
+                <!-- {% if doc.summary %}
+                    <p class="label">📝 Summary:</p>
+                {% else %}
+                    <p class="label">📝 Summary: Not available</p>
+                {% endif %} -->
+
+                <p><strong>Summary:</strong></p>
+                <div style="background: #f9f9f9; padding: 10px; border-left: 4px solid #007bff;">
+                    {{ doc.summary|linebreaks }}
+                </div>
+
+                <!-- <div class="extracted">
                     <h4>📝 Extracted Text:</h4>
                     <div style="white-space: pre-wrap; border: 1px solid #eee; padding: 10px; background: #fafafa;">
                         {{ doc.extracted_text|truncatewords:100 }}
                     </div>
-                </div>
+                </div> -->
             </div>
         {% endfor %}
     {% else %}
